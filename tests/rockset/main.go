@@ -31,7 +31,6 @@ func main() {
 			Kind: "Pod",
 		},
 		ObjectMeta: metav1.ObjectMeta{
-			SelfLink:  "/api/version/pods/foo",
 			Name:      "foo",
 			Namespace: "baz",
 			UID:       "bar",

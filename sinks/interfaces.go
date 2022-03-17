@@ -161,7 +161,7 @@ func ManufactureSink() (e EventSinkInterface) {
 		withFields := viper.GetBool("influxdbWithFields")
 		insecureSsl := viper.GetBool("influxdbInsecureSsl")
 		retentionPolicy := viper.GetString("influxdbRetentionPolicy")
-		cluterName := viper.GetString("influxdbClusterName")
+		clusterName := viper.GetString("influxdbClusterName")
 		disableCounterMetrics := viper.GetBool("influxdbDisableCounterMetrics")
 		concurrency := viper.GetInt("influxdbConcurrency")
 
@@ -174,7 +174,7 @@ func ManufactureSink() (e EventSinkInterface) {
 			WithFields:            withFields,
 			InsecureSsl:           insecureSsl,
 			RetentionPolicy:       retentionPolicy,
-			ClusterName:           cluterName,
+			ClusterName:           clusterName,
 			DisableCounterMetrics: disableCounterMetrics,
 			Concurrency:           concurrency,
 		}
@@ -219,7 +219,7 @@ func ManufactureSink() (e EventSinkInterface) {
 		return eh
 	// case "logfile"
 	default:
-		err := errors.New("Invalid Sink Specified")
+		err := errors.New("invalid Sink Specified")
 		panic(err.Error())
 	}
 	return e

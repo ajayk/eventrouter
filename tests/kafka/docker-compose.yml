@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: golang:1.12.9
+    image: golang:1.17.8
     volumes:
       - ../../:/src/
     working_dir: /src/

@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM alpine:3.9
-MAINTAINER Timothy St. Clair "tstclair@heptio.com"  
+FROM golang:1.17 as build-env
 
-WORKDIR /app
-RUN apk update --no-cache && apk add ca-certificates
-ADD eventrouter /app/
+WORKDIR /go/src/app
+COPY . .
+RUN CGO_ENABLED=0 go build -o /go/bin/eventrouter
+
+FROM gcr.io/distroless/static
 USER nobody:nobody
-
-CMD ["/bin/sh", "-c", "/app/eventrouter -v 3 -logtostderr"]
+COPY --from=build-env /go/bin/eventrouter /
+CMD ["/eventrouter","-v","3","-logtostderr"]
